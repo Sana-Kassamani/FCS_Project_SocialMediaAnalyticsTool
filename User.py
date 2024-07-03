@@ -31,6 +31,7 @@ class User:
             "Currently Reading":[],
             "To Be Read":[]
         })
+        print("New User", name , "added!")
 
     def setName(self,name):
         #O(1)
@@ -87,15 +88,15 @@ class User:
 
     def deleteBooksRead(self,book):
         #O(N), n being nb of books in shelves["Read"]
-        self.addBookToShelve(book,"Read")
+        self.deleteBooksFromShelve(book,"Read")
     
     def deleteBooksCurrentlyReading(self,book):
         #O(N), n being nb of books in shelves["Currently Reading"]
-        self.addBookToShelve(book,"Currently Reading")
+        self.deleteBooksFromShelve(book,"Currently Reading")
 
     def deleteBooksToBeRead(self,book):
         #O(N), n being nb of books in shelves["To Be Read"]
-        self.addBookToShelve(book,"To Be Read")
+        self.deleteBooksFromShelve(book,"To Be Read")
 
     def getBooksRead(self):
         return self.shelves["Read"]
@@ -108,15 +109,23 @@ class User:
     
     def displayUser(self):
         user=""
-        user+= "\tID : " + self.id + "\n"
+        user+= "\tID : " + str(self.id) + "\n"
         user+= "\tName : "+ self.name + "\n"
         user+= "\tFavorite Genres : " 
-        for genre in self.genres:
-            user+=genre+" "
+        user+=(", ").join(self.genres)
         user += "\n"
         user+= "\tShelves : \n" 
         for shelf,books in self.shelves.items():
             user += "\t\t" + shelf +": \n\t\t\t"
-            for book in books:
-                user+= book+" "
+            user+= (", ").join(books)
             user+= "\n"
+        print("\n",user)
+    
+    def deleteUser(self):
+        User.valid_ids.append(self.id)
+        name=self.name
+        self.id=None
+        self.name=""
+        self.genres=[]
+        self.shelves={}
+        print("Deleted user",name)
