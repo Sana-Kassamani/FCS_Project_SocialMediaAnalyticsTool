@@ -33,9 +33,10 @@ class User:
         })
         print("New User", name , "added!")
 
-    def setName(self,name):
+    def changeName(self,name):
         #O(1)
         self.name=name
+        print("Name changed to",name)
     
     def getName(self):
         #O(1)
@@ -53,6 +54,9 @@ class User:
         #O(N), N being number of genres
         if genre.capitalize() not in self.genres:
             print("Cannot delete!",genre,"not in Favorite Genres of",self.name)
+            return
+        self.genres.remove(genre.capitalize())
+        print(genre, "successfully removed from genres!")
 
     def getGenres(self):
         #O(1)

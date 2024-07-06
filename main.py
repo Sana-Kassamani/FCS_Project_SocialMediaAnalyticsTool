@@ -13,14 +13,18 @@ def main():
     user1.addBooksCurrentlyReading("The Inner Circle")
     user1.addBooksToBeRead("How The Light Gets In")
     user1.displayUser()
-    user1.setName("Jacques")
+    user1.changeName("Jacques")
     user1.displayUser()
     user2=User("Mary")
     user2.displayUser()
+    user1.deleteGenre("sci-Fi")
+    user1.displayUser()
     user1.deleteUser()
     user3=User("Ali")
     user3.displayUser()
     user4=User("ahmed")
     user4.displayUser()
+    
+
 
 main()
