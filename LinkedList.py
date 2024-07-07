@@ -7,14 +7,19 @@ class Node:
     def __init__(self,user):
         self.user=user
         self.next = None
+        self.weight=0
+    
+    def setWeight(self,weight):
+        #O(1)
+        self.weight=weight
 
 class LinkedList:
     def __init__(self):
         self.head=None
         self.size = 0
     
-    def addNodeToStart(self, user):
-        node = Node(user)
+    def addNodeToStart(self, node):
+        #O(1)
         if not self.size:
             self.head = node
         else:
@@ -24,6 +29,7 @@ class LinkedList:
         print("Added node",node.user.name,"to list")
 
     def removeNode(self, user):
+        #O(N), N being number of nodes in list
         prev = None
         curr = self.head
 
@@ -50,11 +56,12 @@ class LinkedList:
             print("Successfully deleted", user.name, "from list")
         
     def displayNodes(self):
+        #O(N), N being number of nodes in list
         if not self.size:
             print("List is empty!!")
             return
         curr = self.head
-        print('\n')
+        
         while curr :
             print("(",curr.user.name,",", curr.user.id,")", end="->")
             curr = curr.next
