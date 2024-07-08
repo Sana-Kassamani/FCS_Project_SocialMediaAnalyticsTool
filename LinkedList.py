@@ -28,7 +28,7 @@ class LinkedList:
         self.size +=1
         print("Added node",node.user.name,"to list")
 
-    def removeNode(self, user):
+    def deleteNode(self, user):
         #O(N), N being number of nodes in list
         prev = None
         curr = self.head
@@ -63,6 +63,6 @@ class LinkedList:
         curr = self.head
         
         while curr :
-            print("(",curr.user.name,",", curr.user.id,")", end="->")
+            print("[(",curr.user.name,",", curr.user.id,") ; ",curr.weight," ]", end=" ->")
             curr = curr.next
         print('\n')
