@@ -25,14 +25,19 @@ class Network:
         if user not in self.vertices:
             print("Cannot delete! User not in network!")
             return
+        friend=self.vertices[user].head
+        print(friend)
+        while friend:
+            self.vertices[friend.user].deleteNode(user)
+            friend= friend.next
         del self.vertices[user]
         print("User (",user.name,",",user.id, ") deleted from network")
 
-    def calculateWeight(node1,node2):
+    def calculateWeight(self,node1,node2):
         #O(N*M), N and M being numbers of genres for each user in node1 and node2 respectively
         weight =0
         for i in node1.user.genres:
-            for j in node1.user.genres:
+            for j in node2.user.genres:
                 if i == j :
                     weight +=1
         return weight
@@ -61,6 +66,6 @@ class Network:
             return
         print('\n')
         for user,friends in self.vertices.items():
-            print("User (",user.name,",",user.id, ")", end=" ")
+            print("User (",user.name,",",user.id, ") :", end=" ")
             friends.displayNodes()
         print('\n')
