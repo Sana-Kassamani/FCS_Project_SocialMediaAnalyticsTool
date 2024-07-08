@@ -4,8 +4,9 @@
 # represent this network
 
 from User import User
-from LinkedList import Node
+from Node import Node
 from LinkedList import LinkedList
+from Stack import Stack
 
 class Network:
 
@@ -26,7 +27,6 @@ class Network:
             print("Cannot delete! User not in network!")
             return
         friend=self.vertices[user].head
-        print(friend)
         while friend:
             self.vertices[friend.user].deleteNode(user)
             friend= friend.next
@@ -35,7 +35,7 @@ class Network:
 
     def calculateWeight(self,node1,node2):
         #O(N*M), N and M being numbers of genres for each user in node1 and node2 respectively
-        weight =0
+        weight = 0
         for i in node1.user.genres:
             for j in node2.user.genres:
                 if i == j :
@@ -50,8 +50,8 @@ class Network:
             weight=self.calculateWeight(node1,node2)
             node1.setWeight(weight)
             node2.setWeight(weight)
-            self.vertices[user1].addNodeToStart(node2)
-            self.vertices[user2].addNodeToStart(node1)
+            self.vertices[user1].addNodeToEnd(node2)
+            self.vertices[user2].addNodeToEnd(node1)
 
 
         elif user1 not in self.vertices and user2 not in self.vertices:
@@ -69,3 +69,36 @@ class Network:
             print("User (",user.name,",",user.id, ") :", end=" ")
             friends.displayNodes()
         print('\n')
+
+    def dfs(self,root):
+        if root not in self.vertices:
+            print("Starting Node not in network")
+            return
+        st=Stack()
+        visited = {}
+        for vertex in self.vertices:
+            visited[vertex.id]=False
+        visited[root.id]=True
+        print("visited is ", visited)
+        st.push(Node(root))
+        print("User (", root.name,",",root.id, ")", end=" ")
+        while not st.isEmpty():
+            # print("\n stack now is :")
+            # st.displayNodes()
+            # print('\n')
+            # print("\n visited now is :")
+            # print(visited)
+            node= st.top()
+            st.pop()
+            curr = self.vertices[node.user].head
+            # print("\n")
+            # self.vertices[node.user].displayNodes()
+            while curr :
+                if not visited[curr.user.id]:
+                    st.push(Node(curr.user))
+                    print("User (", curr.user.name,",",curr.user.id, ")", end=" ")
+                    visited[curr.user.id]=True
+                # print("current is", curr.user.name,",",curr.next)
+                curr = curr.next
+               
+
