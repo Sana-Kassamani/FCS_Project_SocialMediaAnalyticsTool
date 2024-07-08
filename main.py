@@ -1,6 +1,8 @@
 from User import User
 from LinkedList import LinkedList
+from Node import Node
 from Network import Network
+from Stack import Stack
 def main():
     # user1=User("jack")
     # user1.addGenre("Thriller")
@@ -36,22 +38,23 @@ def main():
     user3.addGenre("Romance")
     user3.addGenre("Sci-fi")
     user4=User("Samah")
+    user5=User("Akram")
     user4.addGenre("Romance")
     user4.addGenre("Drama")
     net= Network()
     net.addVertex(user1)
     net.addVertex(user2)
+    net.addVertex(user3)
+    net.addVertex(user4)
+    net.addVertex(user5)
     net.displayNetwork()
     net.addConnection(user1,user2)
-
+    net.addConnection(user2,user5)
     net.displayNetwork()
-    net.addConnection(user1,user3)
-    net.addVertex(user4)
-    net.addConnection(user1,user4)
+    net.addConnection(user2,user3)
+    net.addConnection(user3,user4)
     net.displayNetwork()
-    net.deleteVertex(User('Amal'))
-    net.deleteVertex(user4)
-    net.displayNetwork()
+    net.dfs(user1)
     # l.displayNodes()
     # l.addNodeToStart(user1)
     # l.displayNodes()
@@ -65,6 +68,21 @@ def main():
     # l.displayNodes()
     # l.removeNode(user3)
     # l.displayNodes()
+    # stack = Stack()
+    # stack.push(Node(user3))
+    # stack.displayNodes()
+    # stack.push(Node(user2))
+    # print("top is :", stack.top())
+    # stack.push(Node(user4))
+    # stack.displayNodes()
+    # stack.pop()
+    # stack.displayNodes()
+    # stack.pop()
+    # stack.displayNodes()
+    # stack.pop()
+    # stack.displayNodes()
+    # stack.pop()
+    # stack.displayNodes()
 
 
 main()
