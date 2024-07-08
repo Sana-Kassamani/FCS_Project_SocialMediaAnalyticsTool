@@ -1,30 +1,23 @@
-# None and LinkedList class definition:
+# LinkedList class definition:
 # LinkedList class will be used to represent the graph aka network of this social media platform
 
 from User import User
-
-class Node:
-    def __init__(self,user):
-        self.user=user
-        self.next = None
-        self.weight=0
-    
-    def setWeight(self,weight):
-        #O(1)
-        self.weight=weight
+from Node import Node
 
 class LinkedList:
     def __init__(self):
         self.head=None
+        self.tail= None
         self.size = 0
     
-    def addNodeToStart(self, node):
+    def addNodeToEnd(self, node):
         #O(1)
         if not self.size:
             self.head = node
+            self.tail = node
         else:
-            node.next = self.head
-            self.head = node
+            self.tail.next = node
+            self.tail = node
         self.size +=1
         print("Added node",node.user.name,"to list")
 
@@ -38,6 +31,8 @@ class LinkedList:
             return
 
         if curr.user.id == user.id:
+            if self.size == 1:
+                self.tail=None
             self.head= curr.next
             curr.next = None 
             self.size -=1
@@ -63,6 +58,6 @@ class LinkedList:
         curr = self.head
         
         while curr :
-            print("[(",curr.user.name,",", curr.user.id,") ; ",curr.weight," ]", end=" ->")
+            print("[(",curr.user.name,",", curr.user.id,") ; ",curr.weight," ]", end=" -> ")
             curr = curr.next
         print('\n')
