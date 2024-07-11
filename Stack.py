@@ -1,3 +1,5 @@
+# Stack class definition:
+# Stack class will be used in implementing the Depth-First Search (dfs) method of network class
 
 from Node import Node
 
