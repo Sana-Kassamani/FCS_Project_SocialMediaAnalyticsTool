@@ -33,11 +33,13 @@ class Queue:
             self.tail = None
             curr.next = None
             self.size -=1
+            return curr
         else:
             curr = self.head
             self.head = self.head.next
             curr.next = None
             self.size -=1
+            return curr
     
     def displayNodes(self):
         #O(N), N being number of node in Queue
