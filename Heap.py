@@ -76,6 +76,13 @@ class Heap:
     
     def isEmpty(self):
         return self.size ==0
+    
+    def includesUser(self,user):
+        for i in range(1,self.size+1):
+            if self.list[i].user.id == user.id:
+                return self.list[i]
+        return None
+
     def displayNodes(self):
         if not self.size:
             print("Heap is empty!")
