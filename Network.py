@@ -8,6 +8,8 @@ from Node import Node
 from LinkedList import LinkedList
 from Stack import Stack
 from Queue import Queue
+from Heap import Heap
+import math
 
 class Network:
 
@@ -119,6 +121,33 @@ class Network:
                     visited[curr.user.id]=True
                     print("User (", curr.user.name,",",curr.user.id, ")", end=" ")
                 curr=curr.next
+
+    def dijkstra(self,root):
+        dist={}
+        rootNode=Node(root)
+        rootNode.setWeight(0)
+        nodes=[]
+        for user in self.vertices:
+            node=Node(user)
+            node.setWeight(math.inf)
+            nodes.append(node)
+        heap=Heap()
+        heap.heapify(nodes)
+
+        while not heap.isEmpty():
+            minimum = heap.removeMin()
+            dist[minimum.user]=minimum.weight
+            friend = self.vertices[minimum.user].head
+            while friend:
+                node = heap.includesUser(friend.user)
+                if node:
+                    if minimum.weight + friend.weight < node.weight:
+                        node.weight = minimum.weight + friend.weight
+        return dist
+                
+
+            
+        
 
 
 
