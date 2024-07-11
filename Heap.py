@@ -49,8 +49,7 @@ class Heap:
         self.size=len(list)
         while self.size >= self.max_size:
             self.extendHeap()
-        if len(list) >=2:
-            self.head +=1
+
         for i in range(len(list)):
             self.list[i+1]=list[i]
         
@@ -74,7 +73,9 @@ class Heap:
         self.size-=1
         self.percolateDown(1)
         return minimum
-
+    
+    def isEmpty(self):
+        return self.size ==0
     def displayNodes(self):
         if not self.size:
             print("Heap is empty!")
