@@ -7,6 +7,7 @@ from User import User
 from Node import Node
 from LinkedList import LinkedList
 from Stack import Stack
+from Queue import Queue
 
 class Network:
 
@@ -101,4 +102,24 @@ class Network:
                 # print("current is", curr.user.name,",",curr.next)
                 curr = curr.next
                
+    def bfs(self, root):
+        q=Queue()
+        visited={}
+        for vertex in self.vertices:
+            visited[vertex.id]=False
+        q.enqueue(Node(root))
+        visited[root.id]=True
+        print("User (", root.name,",",root.id, ")", end=" ")
+        while not q.isEmpty():
+            node = q.dequeue()
+            curr = self.vertices[node.user].head
+            while curr:
+                if not visited[curr.user.id]:
+                    q.enqueue(Node(curr.user))
+                    visited[curr.user.id]=True
+                    print("User (", curr.user.name,",",curr.user.id, ")", end=" ")
+                curr=curr.next
+
+
+
 
