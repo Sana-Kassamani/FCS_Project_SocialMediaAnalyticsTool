@@ -80,8 +80,8 @@ class Heap:
     def includesUser(self,user):
         for i in range(1,self.size+1):
             if self.list[i].user.id == user.id:
-                return self.list[i]
-        return None
+                return self.list[i], i
+        return None,None
 
     def displayNodes(self):
         if not self.size:
@@ -92,3 +92,8 @@ class Heap:
             print("(",curr.user.name,",", curr.user.id,",",curr.weight,")" , end=" -> ")
 
         print('\n')
+
+    def changeWeight(self,index,weight):
+        self.list[index].weight=weight
+        self.percolateUp(index)
+        
