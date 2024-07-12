@@ -51,14 +51,17 @@ class Network:
     def addConnection(self,user1, user2):
         #O(V)
         if user1 in self.vertices and user2 in self.vertices:
-            node1=Node(user1)
-            node2=Node(user2)
-            weight=self.calculateWeight(node1,node2)
-            node1.setWeight(weight)
-            node2.setWeight(weight)
-            self.vertices[user1].addNodeToEnd(node2)
-            self.vertices[user2].addNodeToEnd(node1)
-            self.edges+=1
+            if not self.isConnected(user1,user2):
+                node1=Node(user1)
+                node2=Node(user2)
+                weight=self.calculateWeight(node1,node2)
+                node1.setWeight(weight)
+                node2.setWeight(weight)
+                self.vertices[user1].addNodeToEnd(node2)
+                self.vertices[user2].addNodeToEnd(node1)
+                self.edges+=1
+            else:
+                print(user1.name, "and", user2.name," are already connected!")
 
 
         elif user1 not in self.vertices and user2 not in self.vertices:
@@ -261,7 +264,7 @@ class Network:
 
         #since it is an undirected graph
         nb_of_triangles = nb_of_triangles / 2
-        
+
         degree=len(friends)
         local_clustering_coefficient= (2*nb_of_triangles)/(degree*(degree - 1))
         return round(local_clustering_coefficient,2)
