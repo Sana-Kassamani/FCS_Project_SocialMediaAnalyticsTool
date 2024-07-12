@@ -245,7 +245,7 @@ class Network:
             curr = curr.next
         return False
 
-    def claculateLocalClusteringCoefficient(self,user):
+    def calculateLocalClusteringCoefficient(self,user):
 
         friends=[]
         curr = self.vertices[user].head
@@ -259,6 +259,9 @@ class Network:
                 if self.isConnected(user,user2):
                     nb_of_triangles+=1
 
+        #since it is an undirected graph
+        nb_of_triangles = nb_of_triangles / 2
+        
         degree=len(friends)
         local_clustering_coefficient= (2*nb_of_triangles)/(degree*(degree - 1))
         return round(local_clustering_coefficient,2)
