@@ -213,14 +213,14 @@ class Network:
         return recommended
 
 
-    # def calculateAverageNumberOfFriendsPerUser(self):
-    #     total_sum=0
+    def calculateAverageNumberOfFriendsPerUser(self):
+        total_sum=0
 
-    #     for user,friends in self.vertices.items():
-    #         sum_of_friends= friends.size
-    #         total_sum+=sum_of_friends
+        for user,friends in self.vertices.items():
+            sum_of_friends= friends.size
+            total_sum+=sum_of_friends
         
-    #     return round(total_sum / len(self.vertices),2)
+        return round(total_sum / len(self.vertices),2)
     
     # def calculateGraphDensity():
 
