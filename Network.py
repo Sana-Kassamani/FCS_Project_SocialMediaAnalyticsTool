@@ -47,6 +47,7 @@ class Network:
                     weight +=1
         return weight
 
+    #ToDo no duplicate connections
     def addConnection(self,user1, user2):
         #O(V)
         if user1 in self.vertices and user2 in self.vertices:
@@ -229,11 +230,43 @@ class Network:
         
         return round(total_sum / len(self.vertices),2)
     
+
     def calculateGraphDensity(self):
         nb_of_vertices = len(self.vertices)
         max_number_of_edges = (nb_of_vertices * (nb_of_vertices - 1)) / 2
         density=round(self.edges/max_number_of_edges,2)
         return density
+    
+    def isConnected(self,user1,user2):
+        curr = self.vertices[user1].head
+        while curr:
+            if curr.user.id == user2.id:
+                return True
+            curr = curr.next
+        return False
+
+    def claculateLocalClusteringCoefficient(self,user):
+
+        friends=[]
+        curr = self.vertices[user].head
+        while curr:
+            friends.append(curr.user)
+            curr=curr.next
+
+        nb_of_triangles=0
+        for user in friends:
+            for user2 in friends:
+                if self.isConnected(user,user2):
+                    nb_of_triangles+=1
+
+        degree=len(friends)
+        local_clustering_coefficient= (2*nb_of_triangles)/(degree*(degree - 1))
+        return round(local_clustering_coefficient,2)
+
+        
+
+        
+
 
 
         
