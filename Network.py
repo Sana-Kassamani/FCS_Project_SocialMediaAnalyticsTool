@@ -222,7 +222,12 @@ class Network:
         
         return round(total_sum / len(self.vertices),2)
     
-    # def calculateGraphDensity():
+    def calculateGraphDensity(self):
+        nb_of_vertices = len(self.vertices)
+        max_number_of_edges = (nb_of_vertices * (nb_of_vertices - 1)) / 2
+        density=round(self.edges/max_number_of_edges,2)
+        return density
+
 
         
 
