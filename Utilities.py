@@ -1,9 +1,12 @@
 
 class Utilities:
-
+    @staticmethod
+    def subtract(a,b):
+        return a-b 
+    
     @staticmethod
     def compareWeights(node1,node2):
-        return node1.weight - node2.weight
+        return Utilities.subtract(node1.weight,node2.weight)
 
 
 
