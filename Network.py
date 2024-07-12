@@ -128,7 +128,7 @@ class Network:
                 curr=curr.next
 
     def dijkstra(self,root):
-        dist={}
+        dist=[]
         rootNode=Node(root)
         rootNode.setWeight(0)
         nodes=[]
@@ -145,7 +145,7 @@ class Network:
         heap.displayNodes()
         while not heap.isEmpty():
             minimum = heap.removeMin()
-            dist[minimum.user]=minimum.weight 
+            dist.append(minimum)
             friend = self.vertices[minimum.user].head
             while friend:
                 node, index = heap.includesUser(friend.user)
@@ -153,7 +153,7 @@ class Network:
                     if minimum.weight + (1/friend.weight) < node.weight:
                         heap.changeWeight( index,minimum.weight + (1/friend.weight))
 
-                        print("changed somesing")
+                        print(node.user.name,"changed somesing")
                 friend=friend.next
         return dist
                 
