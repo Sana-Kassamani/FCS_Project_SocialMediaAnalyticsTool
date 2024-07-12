@@ -9,8 +9,9 @@ from LinkedList import LinkedList
 from Stack import Stack
 from Queue import Queue
 from Heap import Heap
+from Utilities import Utilities
 import math
-
+import random
 class Network:
 
     def __init__(self):
@@ -86,7 +87,7 @@ class Network:
         visited[root.id]=True
         st.push(Node(root))
         result.append(root)
-        print("User (", root.name,",",root.id, ")", end=" ")
+        # print("User (", root.name,",",root.id, ")", end=" ")
         while not st.isEmpty():
             # print("\n stack now is :")
             # st.displayNodes()
@@ -101,12 +102,12 @@ class Network:
             while curr :
                 if not visited[curr.user.id]:
                     st.push(Node(curr.user))
-                    print("User (", curr.user.name,",",curr.user.id, ")", end=" ")
+                    # print("User (", curr.user.name,",",curr.user.id, ")", end=" ")
                     result.append(curr.user)
                     visited[curr.user.id]=True
                 # print("current is", curr.user.name,",",curr.next)
                 curr = curr.next
-            print('\n')
+            # print('\n')
             return result
                
     def bfs(self, root):
@@ -134,7 +135,7 @@ class Network:
         nodes=[]
         nodes.append(rootNode)
         for user in self.vertices:
-            if user.id== root.id:
+            if user.id == root.id:
                 continue
             node=Node(user)
             node.setWeight(math.inf)
@@ -142,7 +143,7 @@ class Network:
         
         heap=Heap()
         heap.heapify(nodes)
-        heap.displayNodes()
+        
         while not heap.isEmpty():
             minimum = heap.removeMin()
             dist.append(minimum)
@@ -153,7 +154,7 @@ class Network:
                     if minimum.weight + (1/friend.weight) < node.weight:
                         heap.changeWeight( index,minimum.weight + (1/friend.weight))
 
-                        print(node.user.name,"changed somesing")
+                        
                 friend=friend.next
         return dist
                 
@@ -170,6 +171,66 @@ class Network:
                 visited+=nodes
         
         return components
+    
+    def recommendFriends(self,user):
+        recommended=[]
+        dist=self.dijkstra(user)
+
+        friends=[]
+        friend=self.vertices[user].head
+        while friend:
+            friends.append(friend.user.id)
+            friend=friend.next
+
+        # print("friends:")
+        # for i in friends:
+        #     print("user ",i)
+
+        # print()
+        # for i in dist:
+        #     print("user ",i.user.name,"id:",i.user.id,"  dist:",i.weight)
+
+        # print()
+
+        # for member in dist:
+        #     if member.user.id in friends or member.user.id == user.id:
+        #         dist.remove(member)
+        # for i in dist:
+        #     print("user ",i.user.name,"  dist:",i.weight)
+        Utilities.mergeSort(dist,0,len(dist)-1,Utilities.compareWeights)
+        for i in range(3) :
+            if i < len(dist) and dist[i].weight != math.inf and dist[i].user.id != user.id and dist[i].user.id not in friends :
+                recommended.append(dist[i].user)
+        
+        if len(recommended) == 0:
+            not_connected=[]
+            for node in dist:
+                if node.weight == math.inf:
+                    not_connected.append(node.user)
+            index= random.randint(0,len(not_connected)-1)
+            recommended.append(not_connected[index])
+
+        return recommended
+
+
+    # def calculateAverageNumberOfFriendsPerUser(self):
+    #     total_sum=0
+
+    #     for user,friends in self.vertices.items():
+    #         sum_of_friends= friends.size
+    #         total_sum+=sum_of_friends
+        
+    #     return round(total_sum / len(self.vertices),2)
+    
+    # def calculateGraphDensity():
+
+        
+
+            
+        
+
+
+                
             
                 
 
