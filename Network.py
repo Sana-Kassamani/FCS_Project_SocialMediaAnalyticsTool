@@ -79,11 +79,13 @@ class Network:
             return
         st=Stack()
         visited = {}
+        result=[]
         for vertex in self.vertices:
             visited[vertex.id]=False
+
         visited[root.id]=True
-        print("visited is ", visited)
         st.push(Node(root))
+        result.append(root)
         print("User (", root.name,",",root.id, ")", end=" ")
         while not st.isEmpty():
             # print("\n stack now is :")
@@ -100,9 +102,12 @@ class Network:
                 if not visited[curr.user.id]:
                     st.push(Node(curr.user))
                     print("User (", curr.user.name,",",curr.user.id, ")", end=" ")
+                    result.append(curr.user)
                     visited[curr.user.id]=True
                 # print("current is", curr.user.name,",",curr.next)
                 curr = curr.next
+            print('\n')
+            return result
                
     def bfs(self, root):
         q=Queue()
@@ -152,8 +157,22 @@ class Network:
                 friend=friend.next
         return dist
                 
+    def connectedComponents(self):
+        components={}
+        index=0
+        visited=[]
 
+        for user in self.vertices:
+            if user not in visited:
+                nodes=self.dfs(user)
+                components[index]=nodes
+                index+=1
+                visited+=nodes
+        
+        return components
             
+                
+
         
 
 
