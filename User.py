@@ -136,7 +136,7 @@ class User:
         self.shelves={}
         print("Deleted user",name)
 
-    def to_dict(self):
+    def toDict(self):
         return {
             'id': self.id,
             'name': self.name,
@@ -144,7 +144,8 @@ class User:
             'shelves': self.shelves
         }
     
-    def from_dict(self, data):
+    @staticmethod
+    def fromDict(data):
         user = User(data['name'])
         user.id = data['id']
         user.genres = data['genres']
