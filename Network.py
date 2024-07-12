@@ -12,6 +12,9 @@ from Heap import Heap
 from Utilities import Utilities
 import math
 import random
+import networkx as nx
+import matplotlib.pyplot as plt
+
 class Network:
 
     def __init__(self):
@@ -268,9 +271,20 @@ class Network:
         degree=len(friends)
         local_clustering_coefficient= (2*nb_of_triangles)/(degree*(degree - 1))
         return round(local_clustering_coefficient,2)
-
-        
-
+    
+    def visualizeNetwork(self):
+        G = nx.Graph()
+        for user, adj_list in self.vertices.items():
+            G.add_node(user.name)
+            current = adj_list.head
+            while current:
+                G.add_edge(user.name, current.user.name, weight=current.weight)
+                current = current.next
+        pos = nx.spring_layout(G)
+        weights = nx.get_edge_attributes(G, 'weight')
+        nx.draw(G, pos, with_labels=True, node_size=2000, node_color='skyblue', font_size=10, font_color='black', font_weight='bold')
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=weights)
+        plt.show()
         
 
 
