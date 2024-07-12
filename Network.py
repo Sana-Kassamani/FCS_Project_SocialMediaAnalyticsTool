@@ -16,6 +16,7 @@ class Network:
 
     def __init__(self):
         self.vertices={}
+        self.edges=0
     
     def addVertex(self, user):
         #O(V)
@@ -56,6 +57,7 @@ class Network:
             node2.setWeight(weight)
             self.vertices[user1].addNodeToEnd(node2)
             self.vertices[user2].addNodeToEnd(node1)
+            self.edges+=1
 
 
         elif user1 not in self.vertices and user2 not in self.vertices:
@@ -198,15 +200,20 @@ class Network:
         # for i in dist:
         #     print("user ",i.user.name,"  dist:",i.weight)
         Utilities.mergeSort(dist,0,len(dist)-1,Utilities.compareWeights)
-        for i in range(3) :
-            if i < len(dist) and dist[i].weight != math.inf and dist[i].user.id != user.id and dist[i].user.id not in friends :
+        i=0
+        while i < len(dist) and len(recommended)== 0 :
+            # make sure not to recommend the user himself or any user who is already a friend or first not connected user
+            if dist[i].user.id != user.id and dist[i].user.id not in friends and dist[i] != math.inf:
                 recommended.append(dist[i].user)
+                return recommended
+            i+=1
         
-        if len(recommended) == 0:
-            not_connected=[]
-            for node in dist:
-                if node.weight == math.inf:
-                    not_connected.append(node.user)
+        # if all vertices in the user's component are his friends, then choose a random user from other components as recommendation
+        not_connected=[]
+        for node in dist:
+            if node.weight == math.inf:
+                not_connected.append(node.user)
+        if not_connected:
             index= random.randint(0,len(not_connected)-1)
             recommended.append(not_connected[index])
 
