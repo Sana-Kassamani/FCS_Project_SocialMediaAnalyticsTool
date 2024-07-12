@@ -17,7 +17,7 @@ def fillNetwork():
     
     num_connections = len(users) * 2  # Arbitrary number of connections
     for _ in range(num_connections):
-        user1, user2 = random.sample(net.vertices.keys(), 2)
+        user1, user2 = random.sample(list(net.vertices.keys()), 2)
         net.addConnection(user1, user2)
     return net
 
