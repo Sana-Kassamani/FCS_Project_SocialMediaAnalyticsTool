@@ -5,6 +5,8 @@
 #   - Favorite Genres
 #   - Shelves containg books they read, currently reading or to be read
 
+import json
+
 class User:
     #user static instance variables
     next_id=1
@@ -133,3 +135,23 @@ class User:
         self.genres=[]
         self.shelves={}
         print("Deleted user",name)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'genres': self.genres,
+            'shelves': self.shelves
+        }
+    
+    def from_dict(self, data):
+        user = User(data['name'])
+        user.id = data['id']
+        user.genres = data['genres']
+        user.shelves = data['shelves']
+        return user
+    
+    def saveUserToJsonFile(self):
+        with open("users.json", mode="a", encoding="utf-8") as file:
+            json.dumps(self.to_dict(), file,indent=4)
+        print("User added to JSON file")
