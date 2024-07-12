@@ -48,6 +48,11 @@ class Network:
             for j in node2.user.genres:
                 if i == j :
                     weight +=1
+
+        user1_books= set(node1.user.getBooksRead() + node1.user.getBooksCurrentlyReading()+node1.user.getBooksToBeRead())
+        user2_books= set(node2.user.getBooksRead() + node2.user.getBooksCurrentlyReading()+node2.user.getBooksToBeRead())
+        intersection = user1_books & user2_books
+        weight += len(intersection)
         return weight
 
     #ToDo no duplicate connections
@@ -282,7 +287,7 @@ class Network:
                 current = current.next
         pos = nx.spring_layout(G)
         weights = nx.get_edge_attributes(G, 'weight')
-        nx.draw(G, pos, with_labels=True, node_size=2000, node_color='skyblue', font_size=10, font_color='black', font_weight='bold')
+        nx.draw(G, pos, with_labels=True, node_size=1000, node_color='skyblue', font_size=10, font_color='black', font_weight='bold')
         nx.draw_networkx_edge_labels(G, pos, edge_labels=weights)
         plt.show()
         
