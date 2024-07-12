@@ -38,7 +38,7 @@ class Network:
 
     def calculateWeight(self,node1,node2):
         #O(N*M), N and M being numbers of genres for each user in node1 and node2 respectively
-        weight = 0
+        weight = 1
         for i in node1.user.genres:
             for j in node2.user.genres:
                 if i == j :
@@ -127,22 +127,29 @@ class Network:
         rootNode=Node(root)
         rootNode.setWeight(0)
         nodes=[]
+        nodes.append(rootNode)
         for user in self.vertices:
+            if user.id== root.id:
+                continue
             node=Node(user)
             node.setWeight(math.inf)
             nodes.append(node)
+        
         heap=Heap()
         heap.heapify(nodes)
-
+        heap.displayNodes()
         while not heap.isEmpty():
             minimum = heap.removeMin()
-            dist[minimum.user]=minimum.weight
+            dist[minimum.user]=minimum.weight 
             friend = self.vertices[minimum.user].head
             while friend:
-                node = heap.includesUser(friend.user)
+                node, index = heap.includesUser(friend.user)
                 if node:
-                    if minimum.weight + friend.weight < node.weight:
-                        node.weight = minimum.weight + friend.weight
+                    if minimum.weight + (1/friend.weight) < node.weight:
+                        heap.changeWeight( index,minimum.weight + (1/friend.weight))
+
+                        print("changed somesing")
+                friend=friend.next
         return dist
                 
 
