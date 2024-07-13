@@ -1,0 +1,215 @@
+[
+    {
+        "id": 1,
+        "name": "Salma",
+        "genres": [
+            "Fiction",
+            "Mystery",
+            "Adventure",
+            "Poetry",
+            "Science fiction"
+        ],
+        "shelves": {
+            "Read": [
+                "Lord of the Flies",
+                "The Count of Monte Cristo",
+                "Sharp Objects"
+            ],
+            "Currently Reading": [
+                "Neuromancer",
+                "The Left Hand of Darkness",
+                "To Kill a Mockingbird"
+            ],
+            "To Be Read": [
+                "Wuthering Heights",
+                "Journey to the Center of the Earth",
+                "Ariel"
+            ]
+        }
+    },
+    {
+        "id": 2,
+        "name": "Rami",
+        "genres": [
+            "Self-help",
+            "Mystery",
+            "Contemporary",
+            "Horror",
+            "Historical fiction"
+        ],
+        "shelves": {
+            "Read": [
+                "Daring Greatly",
+                "Normal People",
+                "Awaken the Giant Within"
+            ],
+            "Currently Reading": [
+                "The Pillars of the Earth",
+                "War and Peace",
+                "The Subtle Art of Not Giving a F*ck"
+            ],
+            "To Be Read": [
+                "Salem's Lot",
+                "The Secret",
+                "Man's Search for Meaning"
+            ]
+        }
+    },
+    {
+        "id": 3,
+        "name": "Karam",
+        "genres": [
+            "Horror",
+            "Memoir"
+        ],
+        "shelves": {
+            "Read": [
+                "Running with Scissors",
+                "The Amityville Horror",
+                "Carrie"
+            ],
+            "Currently Reading": [
+                "The Year of Magical Thinking",
+                "The Exorcist",
+                "Born a Crime"
+            ],
+            "To Be Read": [
+                "Becoming",
+                "My Life in France",
+                "Educated"
+            ]
+        }
+    },
+    {
+        "id": 4,
+        "name": "Lama",
+        "genres": [
+            "Dystopian",
+            "Fiction",
+            "Satire",
+            "Self-help",
+            "Poetry"
+        ],
+        "shelves": {
+            "Read": [
+                "The Raven",
+                "The Catcher in the Rye",
+                "Catch-22"
+            ],
+            "Currently Reading": [
+                "Animal Farm",
+                "Candide",
+                "Wuthering Heights"
+            ],
+            "To Be Read": [
+                "You Are a Badass",
+                "The Iliad",
+                "Brave New World"
+            ]
+        }
+    },
+    {
+        "id": 5,
+        "name": "Nour",
+        "genres": [
+            "Historical fiction",
+            "Young adult",
+            "Children's",
+            "Fantasy",
+            "Mystery"
+        ],
+        "shelves": {
+            "Read": [
+                "The Maze Runner",
+                "Charlie and the Chocolate Factory",
+                "Eleanor & Park"
+            ],
+            "Currently Reading": [
+                "Looking for Alaska",
+                "The Guernsey Literary and Potato Peel Pie Society",
+                "Harry Potter and the Sorcerer's Stone"
+            ],
+            "To Be Read": [
+                "The Tale of Peter Rabbit",
+                "The Very Hungry Caterpillar",
+                "The Help"
+            ]
+        }
+    },
+    {
+        "id": 6,
+        "name": "Fadi",
+        "genres": [
+            "Graphic novel",
+            "Non-fiction"
+        ],
+        "shelves": {
+            "Read": [
+                "Into the Wild",
+                "Batman: The Killing Joke",
+                "Saga"
+            ],
+            "Currently Reading": [
+                "Fun Home",
+                "Maus",
+                "V for Vendetta"
+            ],
+            "To Be Read": [
+                "Locke & Key",
+                "Black Hole",
+                "The Wright Brothers"
+            ]
+        }
+    },
+    {
+        "id": 7,
+        "name": "Rana",
+        "genres": [
+            "Self-help"
+        ],
+        "shelves": {
+            "Read": [
+                "Think and Grow Rich",
+                "Make Your Bed",
+                "You Are a Badass"
+            ],
+            "Currently Reading": [
+                "The Subtle Art of Not Giving a F*ck",
+                "Awaken the Giant Within",
+                "The Life-Changing Magic of Tidying Up"
+            ],
+            "To Be Read": [
+                "How to Win Friends and Influence People",
+                "The 7 Habits of Highly Effective People",
+                "The Secret"
+            ]
+        }
+    },
+    {
+        "id": 8,
+        "name": "Wael",
+        "genres": [
+            "Non-fiction",
+            "Spirituality & religion",
+            "Biography",
+            "Drama"
+        ],
+        "shelves": {
+            "Read": [
+                "The Wright Brothers",
+                "Unbroken",
+                "Into the Wild"
+            ],
+            "Currently Reading": [
+                "Sapiens: A Brief History of Humankind",
+                "The Crucible",
+                "A Midsummer Night's Dream"
+            ],
+            "To Be Read": [
+                "Outliers",
+                "A Course in Miracles",
+                "The Cherry Orchard"
+            ]
+        }
+    }
+]
