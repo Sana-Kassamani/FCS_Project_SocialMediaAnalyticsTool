@@ -38,17 +38,18 @@ class User:
         print("New User", name , "added!")
 
     @staticmethod
-    def showAllUsers(self):
+    def showAllUsers():
         count = 0
         for user in User.users:
             count +=1
             print("[Id:",user.id," Name:",user.name,"]", end="   ")
             if count % 3 == 0:
                 print('\n')
+        print('\n')
             
 
     @staticmethod
-    def selectUser(self,id):
+    def selectUser(id):
         for user in User.users:
             if user.id == id:
                 return user
