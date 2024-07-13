@@ -15,7 +15,7 @@ def fillNetwork():
         new_user=User.fromDict(user)
         net.addVertex(new_user)
     
-    num_connections = len(users) * 2  # Arbitrary number of connections
+    num_connections = len(users)   # Arbitrary number of connections
     for _ in range(num_connections):
         user1, user2 = random.sample(list(net.vertices.keys()), 2)
         net.addConnection(user1, user2)

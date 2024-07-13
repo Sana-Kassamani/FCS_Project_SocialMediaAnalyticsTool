@@ -39,12 +39,16 @@ class User:
 
     @staticmethod
     def showAllUsers():
+        print("Users in platform are:")
+        print("---------------------------------------------------------")
         count = 0
         for user in User.users:
             count +=1
             print("[Id:",user.id," Name:",user.name,"]", end="   ")
             if count % 3 == 0:
                 print('\n')
+            print('\n')
+        print("---------------------------------------------------------")
         print('\n')
             
 

@@ -60,4 +60,4 @@ class LinkedList:
         while curr :
             print("[(",curr.user.name,",", curr.user.id,") ; ",curr.weight," ]", end=" -> ")
             curr = curr.next
-        print('\n')
+        

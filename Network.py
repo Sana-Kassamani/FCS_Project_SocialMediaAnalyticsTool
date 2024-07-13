@@ -6,7 +6,6 @@
 from User import User
 from Node import Node
 from LinkedList import LinkedList
-from Stack import Stack
 from Queue import Queue
 from Heap import Heap
 from Utilities import Utilities
@@ -22,8 +21,11 @@ class Network:
         self.edges=0
     
     def printVertices(self):
+        print("Vertices in graph are:")
+        print("-----------------------------------")
         for user in self.vertices:
             print("[Id:",user.id," Name:",user.name,"]")
+        print("-----------------------------------")
 
     def selectUser(self,id):
         for user in self.vertices:
@@ -96,52 +98,40 @@ class Network:
         for user,friends in self.vertices.items():
             print("User (",user.name,",",user.id, ") :", end=" ")
             friends.displayNodes()
+            print('\n')
         print('\n')
 
     def dfs(self,root):
         if root not in self.vertices:
             print("Starting Node not in network")
             return
-        st=Stack()
         visited = {}
         result=[]
         for vertex in self.vertices:
             visited[vertex.id]=False
+        self.dfsHelper(root,visited,result)
 
+        return result
+    
+    def dfsHelper(self,root,visited,result):
         visited[root.id]=True
-        st.push(Node(root))
         result.append(root)
-        # print("User (", root.name,",",root.id, ")", end=" ")
-        while not st.isEmpty():
-            # print("\n stack now is :")
-            # st.displayNodes()
-            # print('\n')
-            # print("\n visited now is :")
-            # print(visited)
-            node= st.top()
-            st.pop()
-            curr = self.vertices[node.user].head
-            # print("\n")
-            # self.vertices[node.user].displayNodes()
-            while curr :
-                if not visited[curr.user.id]:
-                    st.push(Node(curr.user))
-                    # print("User (", curr.user.name,",",curr.user.id, ")", end=" ")
-                    result.append(curr.user)
-                    visited[curr.user.id]=True
-                # print("current is", curr.user.name,",",curr.next)
-                curr = curr.next
-            # print('\n')
-            return result
+            
+        curr = self.vertices[root].head
+        while curr :
+            if not visited[curr.user.id]:
+                self.dfsHelper(curr.user,visited,result)
+            curr = curr.next
                
     def bfs(self, root):
+        result=[]
         q=Queue()
         visited={}
         for vertex in self.vertices:
             visited[vertex.id]=False
         q.enqueue(Node(root))
+        result.append(root)
         visited[root.id]=True
-        print("User (", root.name,",",root.id, ")", end=" ")
         while not q.isEmpty():
             node = q.dequeue()
             curr = self.vertices[node.user].head
@@ -149,8 +139,9 @@ class Network:
                 if not visited[curr.user.id]:
                     q.enqueue(Node(curr.user))
                     visited[curr.user.id]=True
-                    print("User (", curr.user.name,",",curr.user.id, ")", end=" ")
+                    result.append(curr.user)
                 curr=curr.next
+        return result
 
     def dijkstra(self,root):
         dist=[]
@@ -206,21 +197,6 @@ class Network:
             friends.append(friend.user.id)
             friend=friend.next
 
-        # print("friends:")
-        # for i in friends:
-        #     print("user ",i)
-
-        # print()
-        # for i in dist:
-        #     print("user ",i.user.name,"id:",i.user.id,"  dist:",i.weight)
-
-        # print()
-
-        # for member in dist:
-        #     if member.user.id in friends or member.user.id == user.id:
-        #         dist.remove(member)
-        # for i in dist:
-        #     print("user ",i.user.name,"  dist:",i.weight)
         Utilities.mergeSort(dist,0,len(dist)-1,Utilities.compareWeights)
         i=0
         while i < len(dist) and len(recommended)== 0 :
@@ -244,15 +220,18 @@ class Network:
 
     def calculateAverageNumberOfFriendsPerUser(self):
         total_sum=0
-
+        
         for user,friends in self.vertices.items():
             sum_of_friends= friends.size
             total_sum+=sum_of_friends
-        
+        if len(self.vertices)==0:
+            return 0
         return round(total_sum / len(self.vertices),2)
     
 
     def calculateGraphDensity(self):
+        if len(self.vertices)==0:
+            return 0
         nb_of_vertices = len(self.vertices)
         max_number_of_edges = (nb_of_vertices * (nb_of_vertices - 1)) / 2
         density=round(self.edges/max_number_of_edges,2)
@@ -284,6 +263,8 @@ class Network:
         nb_of_triangles = nb_of_triangles / 2
 
         degree=len(friends)
+        if degree == 0:
+            return 0
         local_clustering_coefficient= (2*nb_of_triangles)/(degree*(degree - 1))
         return round(local_clustering_coefficient,2)
     
