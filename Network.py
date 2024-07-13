@@ -21,6 +21,11 @@ class Network:
         self.vertices={}
         self.edges=0
     
+    def selectUser(self,id):
+        for user in self.vertices:
+            if user.id == id:
+                return user
+        print("No user with id",id)
     def addVertex(self, user):
         #O(V)
         if user in self.vertices:
