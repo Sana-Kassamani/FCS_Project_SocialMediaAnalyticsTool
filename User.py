@@ -11,6 +11,7 @@ class User:
     #user static instance variables
     next_id=1
     valid_ids=[]
+    users=[]
 
     def __init__(self,name):
         # makes sure each user has unique id and ids are reused after deletion
@@ -33,7 +34,25 @@ class User:
             "Currently Reading":[],
             "To Be Read":[]
         })
+        User.users.append(self)
         print("New User", name , "added!")
+
+    @staticmethod
+    def showAllUsers(self):
+        count = 0
+        for user in User.users:
+            count +=1
+            print("[Id:",user.id," Name:",user.name,"]", end="   ")
+            if count % 3 == 0:
+                print('\n')
+            
+
+    @staticmethod
+    def selectUser(self,id):
+        for user in User.users:
+            if user.id == id:
+                return user
+        print("No user with id",id)
 
     def changeName(self,name):
         #O(1)
@@ -129,6 +148,7 @@ class User:
     
     def deleteUser(self):
         User.valid_ids.append(self.id)
+        User.users.remove(self)
         name=self.name
         self.id=None
         self.name=""
@@ -152,7 +172,3 @@ class User:
         user.shelves = data['shelves']
         return user
     
-    def saveUserToJsonFile(self):
-        with open("users.json", mode="a", encoding="utf-8") as file:
-            json.dumps(self.to_dict(), file,indent=4)
-        print("User added to JSON file")

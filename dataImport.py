@@ -36,6 +36,6 @@ def generateRandomUsers(num_users):
     return users
 
 # Save users to JSON
-users = generateRandomUsers(2)  # Generate 50 users
+users = generateRandomUsers(8)  # Generate 20 users
 with open('users.json', 'w') as file:
     json.dump(users, file, indent=4)
