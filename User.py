@@ -48,8 +48,8 @@ class User:
             print("[Id:",user.id," Name:",user.name,"]", end="   ")
             if count % 3 == 0:
                 print('\n')
-            print('\n')
-        print("---------------------------------------------------------")
+            
+        print("\n---------------------------------------------------------")
         print('\n')
             
     # method to search for user by id and return a reference
