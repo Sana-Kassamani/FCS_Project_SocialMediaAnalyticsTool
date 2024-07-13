@@ -21,6 +21,4 @@ def fillNetwork():
         net.addConnection(user1, user2)
     return net
 
-net=fillNetwork()
 
-net.displayNetwork()
