@@ -1,17 +1,21 @@
+# static class containing helping methods
 
 class Utilities:
     @staticmethod
     def subtract(a,b):
+        #O(1)
         return a-b 
     
     @staticmethod
     def compareWeights(node1,node2):
+        #O(1)
         return Utilities.subtract(node1.weight,node2.weight)
 
 
 
     @staticmethod
     def mergeSort(items,low,high, cmp):
+        #O(NlogN) N being length of items
         if low< high:
             mid = (low+high)//2
             Utilities.mergeSort(items,low,mid,cmp)
@@ -21,6 +25,7 @@ class Utilities:
 
     @staticmethod
     def merge(items,low,mid,high,cmp):
+        #O(N) N being length of items
         left_size=mid-low+1
         right_size=high-mid
 

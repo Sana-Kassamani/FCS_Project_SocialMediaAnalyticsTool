@@ -52,7 +52,7 @@ class User:
         print("---------------------------------------------------------")
         print('\n')
             
-
+    # method to search for user by id and return a reference
     @staticmethod
     def selectUser(id):
         #O(N), N is number of users in platform
