@@ -5,7 +5,7 @@ from Network import Network
 from Heap import Heap
 from Utilities import Utilities
 from fillNetwork import fillNetwork
-import json
+
 def displayMainMenu():
     print("Menu:\n" +
             "\t1. Manage Users\n" +
@@ -38,6 +38,7 @@ def displayNetworkMenu():
             "\t11. Calculate graph density\n"+
             "\t12. Calculate local clustering coefficient for a certain user\n"+
             "\t13. Exit Network\n")
+    
 def goToMain(net):
     displayMainMenu()
     option = input("Enter what do you wish to manage: ")
@@ -64,11 +65,14 @@ def goToUser(net):
 
 
         elif option == "2":
+            
             id=input("Deleting user. Enter id of user you wish to delete: ")
             while not id.isdigit():
+                # make sure id can be parsed to int
                 id=input("Id should be integer. Enter valid id: ")
             user = User.selectUser(int(id))
             while not user:
+                # make sure user of id is present in platform
                 id=input("Deleting user. Enter id of user you wish to delete: ")
                 while not id.isdigit():
                     id=input("Id should be integer. Enter valid id: ")
@@ -163,6 +167,7 @@ def goToNetwork(net):
     option = input("Enter what do you wish to do with network: ")
     while option != "13":
         if option == "1":
+            # Either add vertex of an already present user or create a new user and add its vertex
             choice=input("Wanna create a new user or add existing one? Enter create OR add: ")
             while choice not in ["create","add"]:
                 choice=input("Wanna create a new user or add existing one? Enter create OR add ONLY! ")

@@ -39,6 +39,7 @@ class User:
 
     @staticmethod
     def showAllUsers():
+        #O(N), N is number of users in platform
         print("Users in platform are:")
         print("---------------------------------------------------------")
         count = 0
@@ -54,6 +55,7 @@ class User:
 
     @staticmethod
     def selectUser(id):
+        #O(N), N is number of users in platform
         for user in User.users:
             if user.id == id:
                 return user
@@ -138,6 +140,7 @@ class User:
         return self.shelves["To Be Read"]
     
     def displayUser(self):
+        #O(1)
         user=""
         user+= "\tID : " + str(self.id) + "\n"
         user+= "\tName : "+ self.name + "\n"
@@ -152,6 +155,7 @@ class User:
         print("\n",user)
     
     def deleteUser(self):
+        #O(N), N being number of users in platform
         User.valid_ids.append(self.id)
         User.users.remove(self)
         name=self.name
@@ -162,6 +166,7 @@ class User:
         print("Deleted user",name)
 
     def toDict(self):
+        #O(1)
         return {
             'id': self.id,
             'name': self.name,
@@ -171,6 +176,7 @@ class User:
     
     @staticmethod
     def fromDict(data):
+        #O(1)
         user = User(data['name'])
         user.id = data['id']
         user.genres = data['genres']

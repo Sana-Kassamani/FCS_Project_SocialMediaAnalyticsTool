@@ -21,6 +21,7 @@ class Network:
         self.edges=0
     
     def printVertices(self):
+        #O(V)
         print("Vertices in graph are:")
         print("-----------------------------------")
         for user in self.vertices:
@@ -28,6 +29,7 @@ class Network:
         print("-----------------------------------")
 
     def selectUser(self,id):
+        #O(V)
         for user in self.vertices:
             if user.id == id:
                 return user
@@ -42,7 +44,7 @@ class Network:
         print("User (",user.name,",",user.id, ") added to network")
 
     def deleteVertex(self, user):
-        #O(V)
+        #O(V*E)
         if user not in self.vertices:
             print("Cannot delete! User not in network!")
             return
@@ -67,7 +69,7 @@ class Network:
         weight += len(intersection)
         return weight
 
-    #ToDo no duplicate connections
+    
     def addConnection(self,user1, user2):
         #O(V)
         if user1 in self.vertices and user2 in self.vertices:
@@ -102,6 +104,7 @@ class Network:
         print('\n')
 
     def dfs(self,root):
+        #O(V+E), E is number of edges in network
         if root not in self.vertices:
             print("Starting Node not in network")
             return
@@ -113,7 +116,9 @@ class Network:
 
         return result
     
+    # recursive method of dfs
     def dfsHelper(self,root,visited,result):
+        #O(V+E), E is number of edges in network
         visited[root.id]=True
         result.append(root)
             
@@ -124,6 +129,7 @@ class Network:
             curr = curr.next
                
     def bfs(self, root):
+        #O(V+E), E is number of edges in network
         result=[]
         q=Queue()
         visited={}
@@ -144,6 +150,7 @@ class Network:
         return result
 
     def dijkstra(self,root):
+        #O(logV*E), E is number of edges in network
         dist=[]
         rootNode=Node(root)
         rootNode.setWeight(0)
@@ -167,6 +174,7 @@ class Network:
                 node, index = heap.includesUser(friend.user)
                 if node:
                     if minimum.weight + (1/friend.weight) < node.weight:
+                        #O(logV*E) dominated by this
                         heap.changeWeight( index,minimum.weight + (1/friend.weight))
 
                         
@@ -174,6 +182,7 @@ class Network:
         return dist
                 
     def connectedComponents(self):
+        #O(V**2), E is number of edges in network
         components={}
         index=0
         visited=[]
@@ -187,7 +196,10 @@ class Network:
         
         return components
     
+    # recommendation is based on shortest distance between one node and all other nodes in its component
+    # implements dijkstra's algo
     def recommendFriends(self,user):
+        #O(E*log(V))
         recommended=[]
         dist=self.dijkstra(user)
 
@@ -219,6 +231,7 @@ class Network:
 
 
     def calculateAverageNumberOfFriendsPerUser(self):
+        #O(V+E), E is number of edges in network
         total_sum=0
         
         for user,friends in self.vertices.items():
@@ -230,6 +243,7 @@ class Network:
     
 
     def calculateGraphDensity(self):
+        #O(1)
         if len(self.vertices)==0:
             return 0
         nb_of_vertices = len(self.vertices)
@@ -238,6 +252,7 @@ class Network:
         return density
     
     def isConnected(self,user1,user2):
+        #O(E), E is degree of user1
         curr = self.vertices[user1].head
         while curr:
             if curr.user.id == user2.id:
@@ -246,7 +261,7 @@ class Network:
         return False
 
     def calculateLocalClusteringCoefficient(self,user):
-
+        #O(E*E), E degree of user
         friends=[]
         curr = self.vertices[user].head
         while curr:
@@ -268,6 +283,7 @@ class Network:
         local_clustering_coefficient= (2*nb_of_triangles)/(degree*(degree - 1))
         return round(local_clustering_coefficient,2)
     
+    # modules did not work after some changes so i commented it out 
     # def visualizeNetwork(self):
     #     G = nx.Graph()
     #     for user, adj_list in self.vertices.items():
